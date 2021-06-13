@@ -18,7 +18,7 @@ Parameters:
     AllowedValues:
       - /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
   K8sPrivateDomainName:
-    Description: k8s cluster private domain name with AWS Route 53
+    Description: k8s cluster private domain name with AWS Route53
     Type: String
     Default: nickname.cndk.k8s
 
