@@ -1,0 +1,46 @@
+# Base Image
+BOX_IMAGE = "ubuntu/focal64"
+BOX_VERSION = "20210603.0.0"
+
+# max number of worker nodes
+N = 2
+
+Vagrant.configure("2") do |config|
+  #-----Manager Node
+      config.vm.define "k3s-m" do |subconfig|
+        subconfig.vm.box = BOX_IMAGE
+        config.vm.box_version = BOX_VERSION
+        subconfig.vm.provider "virtualbox" do |v|
+          v.name = "k3s-m"
+          v.memory = 1536
+          v.cpus = 2
+          v.linked_clone = true
+        end
+        subconfig.vm.hostname = "k3s-m"
+        subconfig.vm.synced_folder "./", "/vagrant", disabled: true
+        subconfig.vm.network "private_network", ip: "192.168.200.10"
+        subconfig.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
+        subconfig.vm.provision "shell", path: "https://raw.githubusercontent.com/gasida/DKOS/main/K3S/pre_config.sh", args: N
+        subconfig.vm.provision "shell", path: "https://raw.githubusercontent.com/gasida/DKOS/main/K3S/master_node.sh"
+      end
+  
+  #-----Worker Node
+    (1..N).each do |i|
+      config.vm.define "k3s-w#{i}" do |subconfig|
+        subconfig.vm.box = BOX_IMAGE
+        config.vm.box_version = BOX_VERSION
+        subconfig.vm.provider "virtualbox" do |v|
+          v.name = "k3s-w#{i}"
+          v.memory = 768
+          v.cpus = 1
+          v.linked_clone = true
+        end
+        subconfig.vm.hostname = "k3s-w#{i}"
+        subconfig.vm.synced_folder "./", "/vagrant", disabled: true
+        subconfig.vm.network "private_network", ip: "192.168.200.10#{i}"
+        subconfig.vm.network "forwarded_port", guest: 22, host: "6001#{i}", auto_correct: true, id: "ssh"
+        subconfig.vm.provision "shell", path: "https://raw.githubusercontent.com/gasida/DKOS/main/K3S/pre_config.sh", args: N
+        subconfig.vm.provision "shell", path: "https://raw.githubusercontent.com/gasida/DKOS/main/K3S/worker_nodes.sh"
+      end
+    end
+end
