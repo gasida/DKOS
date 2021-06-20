@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: livenessprobe
+spec:
+  containers:
+  - name: livenessprobe
+    image: nginx
+    livenessProbe: 
+      httpGet:     
+        port: 80
+        path: /index.html

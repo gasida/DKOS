@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: completed-pod
+spec:
+  containers:
+    - name: completed-pod
+      image: busybox
+      command: ["sh"]
+      args: ["-c", "sleep 5 && exit 0"]

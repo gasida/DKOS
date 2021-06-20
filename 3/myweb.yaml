@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myweb
+spec:
+  containers:
+  - image: nginx:latest
+    name: myweb-container
+    ports:
+    - containerPort: 80
+      protocol: TCP

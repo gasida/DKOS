@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readinessprobe
+  labels:
+    readinessprobe: first
+spec:
+  containers:
+  - name: readinessprobe
+    image: nginx       
+    readinessProbe:
+      httpGet:
+        port: 80
+        path: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readinessprobe-service
+spec:
+  ports:
+    - name: nginx
+      port: 80
+      targetPort: 80
+  selector:
+    readinessprobe: first
+  type: ClusterIP
