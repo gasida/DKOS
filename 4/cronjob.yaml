@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"            # Job 실행 주기
+  successfulJobsHistoryLimit: 10     # 성공 Job 최대 기록
+  jobTemplate:                       # 실행될 Job 설정 내용(spec)
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the DKOS Member!
+          restartPolicy: OnFailure

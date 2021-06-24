@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-2
+spec:
+  selector:
+    matchLabels:
+      name: daemonset-cndk-2
+  template:
+    metadata:             
+      labels:
+        name: daemonset-cndk-2
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+      containers:
+      - name: daemonset-pod-2
+        image: nginx

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replicaset-cndk
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cndk-nginx-pods
+  template:
+    metadata:
+      name: cndk-nginx-pod
+      labels:
+        app: cndk-nginx-pods
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
