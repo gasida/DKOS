@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deploy-websrv
+  template:
+    metadata:
+      labels:
+        app: deploy-websrv
+    spec:
+      containers:
+      - name: cndk-websrv
+        image: k8s.gcr.io/echoserver:1.5
+        ports:
+        - containerPort: 8080
