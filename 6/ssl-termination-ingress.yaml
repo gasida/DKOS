@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: https
+spec:
+  tls:
+  - hosts:
+    - dkos.com
+    secretName: secret-https
+  rules:
+    - host: dkos.com
+      http:
+        paths:
+        - backend:
+            serviceName: svc-https
+            servicePort: 8080
