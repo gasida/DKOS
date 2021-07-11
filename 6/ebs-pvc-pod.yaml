@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-pvc        
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce       
+  resources:
+    requests:
+      storage: 5Gi        
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ec2-pod
+spec:
+  containers:
+    - name: container
+      image: ubuntu
+      args: [ "tail", "-f", "/dev/null" ]
+      volumeMounts:
+      - name: ebs-volume
+        mountPath: /mnt
+  volumes:
+  - name : ebs-volume
+    persistentVolumeClaim:
+      claimName: ebs-pvc

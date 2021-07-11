@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-pod3
+spec:
+  containers:
+    - name: container
+      image: ubuntu
+      args: [ "tail", "-f", "/dev/null" ]
+      volumeMounts:
+      - name: pvc-pv
+        mountPath: /share
+  volumes:
+  - name : pvc-pv
+    persistentVolumeClaim:
+      claimName: pvc1

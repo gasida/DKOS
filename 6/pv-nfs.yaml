@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1-nfs
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+  - ReadWriteMany
+  nfs:                         
+    server: 192.168.100.10
+    path: /nfs4-share
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv2-nfs
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadOnlyMany
+  nfs:                         
+    server: 192.168.100.10
+    path: /nfs4-share
