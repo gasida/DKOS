@@ -10,13 +10,13 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 # calico install
 curl -O https://docs.projectcalico.org/manifests/calico.yaml
-sed -i 's/policy\/v1beta1/policy\/v1/g' calico.yaml
 kubectl apply -f calico.yaml
 
 # calicoctl install
 curl -o kubectl-calico -O -L  "https://github.com/projectcalico/calicoctl/releases/download/v3.19.1/calicoctl"
 chmod +x kubectl-calico
 mv kubectl-calico /usr/bin
+cp /usr/bin/kubectl-calico /usr/bin/calicoctl
 
 # etcdctl install
 apt install etcd-client -y
