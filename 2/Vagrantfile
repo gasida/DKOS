@@ -1,9 +1,9 @@
 # Base Image
 BOX_IMAGE = "ubuntu/focal64"
-BOX_VERSION = "20210603.0.0"
+BOX_VERSION = "20210709.0.0"
 
 # max number of worker nodes
-N = 2
+N = 3
 
 # ssh config
 $ssh_config = <<-SCRIPT
@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
       config.vm.box_version = BOX_VERSION
       subconfig.vm.provider "virtualbox" do |v|
         v.name = "k8s-w#{i}"
-        v.memory = 1536
+        v.memory = 768 
         v.cpus = 1
         v.linked_clone = true
       end

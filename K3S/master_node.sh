@@ -14,3 +14,8 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 # alias kubectl to k 
 echo 'alias k=kubectl' >> ~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
+
+# kubectx kubens install
+git clone https://github.com/ahmetb/kubectx /opt/kubectx
+ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
