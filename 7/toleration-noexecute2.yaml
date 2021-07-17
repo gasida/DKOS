@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod2-noexecute
+spec:
+ tolerations:
+ - effect: NoExecute
+   key: out-of-ssd
+   operator: Exists
+   tolerationSeconds: 30
+ containers:
+ - name: container
+   image: nginx:1.20-alpine
+ terminationGracePeriodSeconds: 0

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-backup
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:   
+      - topologyKey: team
+        labelSelector:
+          matchExpressions:
+          -  {key: type, operator: In, values: [db-master]}
+  containers:
+  - name: mariadb
+    image: mariadb:10.3
+    env:
+    - name: MARIADB_ROOT_PASSWORD
+      value: "qwe123"
+    ports:
+    - containerPort: 3306
+  terminationGracePeriodSeconds: 0

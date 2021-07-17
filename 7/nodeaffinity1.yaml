@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-node-affinity1
+spec:
+ affinity:
+  nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:   
+    nodeSelectorTerms:
+    - matchExpressions:
+      -  {key: aserver, operator: Exists}
+ containers:
+ - name: container
+   image: nginx:1.20-alpine
+ terminationGracePeriodSeconds: 0

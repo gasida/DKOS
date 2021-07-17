@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod2
+spec:
+ nodeSelector:
+  ssd: storage1
+ containers:
+ - name: container
+   image: nginx:1.20-alpine
+ terminationGracePeriodSeconds: 0

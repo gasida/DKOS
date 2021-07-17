@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-master
+spec:
+  nodeSelector:
+    team: 'dev'
+  containers:
+  - name: mariadb
+    image: mariadb:10.3
+    env:
+    - name: MARIADB_ROOT_PASSWORD
+      value: "qwe123"
+    ports:
+    - containerPort: 3306
+  terminationGracePeriodSeconds: 0
