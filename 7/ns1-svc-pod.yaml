@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
   - name: container
-    image: gcr.io/google-samples/kubernetes-bootcamp:v1
+    image: traefik/whoami
 ---
 apiVersion: v1
 kind: Service
