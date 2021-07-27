@@ -39,9 +39,8 @@ ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 
 ## kube-ps1 install
-git clone https://github.com/jonmosco/kube-ps1.git
+git clone https://github.com/jonmosco/kube-ps1.git /root/kube-ps1
 echo "source ~/kube-ps1/kube-ps1.sh" >> ~/.bashrc
 echo "KUBE_PS1_SYMBOL_ENABLE=false" >> ~/.bashrc
 echo "PS1='[\u@\h:\w \$(kube_ps1)]\$ '" >> ~/.bashrc
 sed -i "s/kubernetes-admin@kubernetes/ctx-k8s/g" ~/.kube/config
-source ~/.bashrc
