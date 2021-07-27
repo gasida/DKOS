@@ -37,3 +37,11 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+
+## kube-ps1 install
+git clone https://github.com/jonmosco/kube-ps1.git
+echo "source ~/kube-ps1/kube-ps1.sh" >> ~/.bashrc
+echo "KUBE_PS1_SYMBOL_ENABLE=false" >> ~/.bashrc
+echo "PS1='[\u@\h:\w \$(kube_ps1)]\$ '" >> ~/.bashrc
+sed -i "s/kubernetes-admin@kubernetes/ctx-k8s/g" ~/.kube/config
+source ~/.bashrc
