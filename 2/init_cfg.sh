@@ -29,7 +29,7 @@ EOF
 systemctl daemon-reload && systemctl restart docker
 
 # package install
-apt-get install bridge-utils net-tools jq tree wireguard -y
+apt-get install bridge-utils net-tools jq tree wireguard iputils-arping -y
 
 # swap off
 swapoff -a

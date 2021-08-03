@@ -13,7 +13,8 @@ curl -O https://docs.projectcalico.org/manifests/calico.yaml
 kubectl apply -f calico.yaml
 
 # calicoctl install
-curl -o kubectl-calico -O -L  "https://github.com/projectcalico/calicoctl/releases/download/v3.19.1/calicoctl"
+# curl -o kubectl-calico -O -L  "https://github.com/projectcalico/calicoctl/releases/download/<VERSION>/calicoctl"
+curl -o kubectl-calico -O -L  "https://github.com/projectcalico/calicoctl/releases/download/v3.20.0/calicoctl"
 chmod +x kubectl-calico
 mv kubectl-calico /usr/bin
 cp /usr/bin/kubectl-calico /usr/bin/calicoctl
@@ -43,4 +44,4 @@ git clone https://github.com/jonmosco/kube-ps1.git /root/kube-ps1
 echo "source /root/kube-ps1/kube-ps1.sh" >> ~/.bashrc
 echo "KUBE_PS1_SYMBOL_ENABLE=false" >> ~/.bashrc
 echo "PS1='[\u@\h:\w \$(kube_ps1)]\\\$ '" >> ~/.bashrc
-sed -i "s/kubernetes-admin@kubernetes/ctx-k8s/g" ~/.kube/config
+kubectl config rename-context "kubernetes-admin@kubernetes" "ctx-k8s"
