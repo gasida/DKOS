@@ -27,12 +27,12 @@ source <(kubectl completion bash)
 source <(kubeadm completion bash)
 
 ## Source the completion script in your ~/.bashrc file
-echo 'source <(kubectl completion bash)' >>~/.bashrc 
-echo 'source <(kubeadm completion bash)' >>~/.bashrc
+echo 'source <(kubectl completion bash)' >> ~/.bashrc 
+echo 'source <(kubeadm completion bash)' >> ~/.bashrc
 
 ## alias kubectl to k 
 echo 'alias k=kubectl' >> ~/.bashrc
-echo 'complete -F __start_kubectl k' >>~/.bashrc
+echo 'complete -F __start_kubectl k' >> ~/.bashrc
 
 ## kubectx kubens install
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
@@ -41,7 +41,13 @@ ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 
 ## kube-ps1 install
 git clone https://github.com/jonmosco/kube-ps1.git /root/kube-ps1
-echo "source /root/kube-ps1/kube-ps1.sh" >> ~/.bashrc
-echo "KUBE_PS1_SYMBOL_ENABLE=false" >> ~/.bashrc
-echo "PS1='[\u@\h:\w \$(kube_ps1)]\\\$ '" >> ~/.bashrc
-kubectl config rename-context "kubernetes-admin@kubernetes" "ctx-k8s"
+cat <<"EOT" >> ~/.bash_profile
+source /root/kube-ps1/kube-ps1.sh
+KUBE_PS1_SYMBOL_ENABLE=false
+function get_cluster_short() {
+  echo "$1" | cut -d . -f1
+}
+KUBE_PS1_CLUSTER_FUNCTION=get_cluster_short
+KUBE_PS1_SUFFIX=') '
+PS1='$(kube_ps1)'$PS1
+EOT

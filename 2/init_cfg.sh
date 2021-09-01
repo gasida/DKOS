@@ -29,15 +29,16 @@ EOF
 systemctl daemon-reload && systemctl restart docker
 
 # package install
-apt-get install bridge-utils net-tools jq tree wireguard iputils-arping -y
+apt-get install bridge-utils net-tools jq tree wireguard -y
 
 # swap off
 swapoff -a
 
-# Installing kubeadm kubelet and kubectl
+# Installing kubeadm kubelet and kubectl - v1.21.2
 curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt-get update
-apt-get install -y kubelet kubeadm kubectl
+#apt-get install -y kubelet kubeadm kubectl
+apt-get install -y kubelet=1.21.4-00 kubectl=1.21.4-00 kubeadm=1.21.4-00
 apt-mark hold kubelet kubeadm kubectl
 systemctl enable kubelet && systemctl start kubelet
