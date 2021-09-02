@@ -34,7 +34,7 @@ apt-get install bridge-utils net-tools jq tree wireguard -y
 # swap off
 swapoff -a
 
-# Installing kubeadm kubelet and kubectl - v1.21.2
+# Installing kubeadm kubelet and kubectl - v1.21.4
 curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt-get update

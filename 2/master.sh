@@ -27,8 +27,8 @@ source <(kubectl completion bash)
 source <(kubeadm completion bash)
 
 ## Source the completion script in your ~/.bashrc file
-echo 'source <(kubectl completion bash)' >> ~/.bashrc 
-echo 'source <(kubeadm completion bash)' >> ~/.bashrc
+echo 'source <(kubectl completion bash)' >> /etc/profile
+echo 'source <(kubeadm completion bash)' >> /etc/profile
 
 ## alias kubectl to k 
 echo 'alias k=kubectl' >> /etc/profile
